@@ -6,6 +6,7 @@ async function update_note(req, res) {
     if (
       typeof note.header === "string" &&
       typeof note.body === "string" &&
+      typeof note.color === "string" &&
       Number.isInteger(note.id) &&
       Number.isInteger(note.last_modified)
     ) {
@@ -13,7 +14,8 @@ async function update_note(req, res) {
         header: note.header,
         body: note.body,
         id: note.id,
-        last_modified: note.last_modified
+        last_modified: note.last_modified,
+        color:note.color
       };
       try {
         note_ops.update_note(user_id, note);

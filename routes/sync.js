@@ -6,8 +6,6 @@ async function sync(req, res) {
     if (Array.isArray(sync_queue)) {
       for (var i = 0; i < sync_queue.length; i++) {
         var note = sync_queue[i];
-        // console.log(typeof note.type)
-        // console.log(typeof note.data)
         if (typeof note.type === "string" && typeof note.data === "object") {
           if (note.type === "delete") {
             if (Number.isInteger(note.data.id)) {
@@ -18,6 +16,7 @@ async function sync(req, res) {
             if (
               typeof note.data.header === "string" &&
               typeof note.data.body === "string" &&
+              typeof note.data.color === "string" &&
               Number.isInteger(note.data.id) &&
               Number.isInteger(note.data.last_modified)
             ) {
@@ -25,7 +24,8 @@ async function sync(req, res) {
                 header: note.data.header,
                 body: note.data.body,
                 id: note.data.id,
-                last_modified: note.data.last_modified
+                last_modified: note.data.last_modified,
+                color:note.data.color
               };
               switch (note.type) {
                 case "add":
