@@ -83,11 +83,10 @@ async function get_notes(user_id) {
   return user[0].notes
 }
 
-async function get_note_by_id(user_id,note_id) {
-  var notes=await findDocuments("users", {
-        id: user_id,"notes.id":note_id
-    })
-  return notes[0]
+async function get_note_by_id(user_id, note_id) {
+    const user = await findDocuments("users", { id: user_id })
+    const note = user[0].notes.find(el => el.id === note_id)
+    return note
 }
 
 async function update_note(user_id,note_id,update) {
